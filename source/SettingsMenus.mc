@@ -1,5 +1,4 @@
 import Toybox.Lang;
-import Toybox.System;
 import Toybox.WatchUi;
 
 // Top-level menu reached with the MENU button. Split editing lives entirely on
@@ -24,7 +23,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
         menu.addItem(new WatchUi.MenuItem("Alerts", store.getAlertLabel(), :alerts, null));
         menu.addItem(new WatchUi.MenuItem("Reset splits", "clear this set's results",
             :reset, null));
-        menu.addItem(new WatchUi.MenuItem("Discard run", "exit without saving",
+        menu.addItem(new WatchUi.MenuItem("Discard run", "delete without saving",
             :discard, null));
         return menu;
     }
@@ -68,8 +67,7 @@ class MainMenuDelegate extends WatchUi.Menu2InputDelegate {
             WatchUi.popView(WatchUi.SLIDE_RIGHT);
 
         } else if (id == :discard) {
-            _recorder.stopAndDiscard();
-            System.exit();
+            DiscardConfirmationDelegate.prompt(_recorder);
         }
     }
 

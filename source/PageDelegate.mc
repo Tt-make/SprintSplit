@@ -71,14 +71,57 @@ class PageDelegate extends WatchUi.BehaviorDelegate {
     }
 
     public function onBack() as Boolean {
-        WatchUi.pushView(new WatchUi.Confirmation("Save run?"),
-            new StopConfirmationDelegate(_recorder), WatchUi.SLIDE_IMMEDIATE);
+        var menu = EndRunMenuDelegate.build();
+        WatchUi.pushView(menu, new EndRunMenuDelegate(_recorder), WatchUi.SLIDE_UP);
         return true;
     }
 }
 
-class StopConfirmationDelegate extends WatchUi.ConfirmationDelegate {
+// Ending a run offers three ways out: keep it, throw it away, or go back to the
+// run. Backing out of this menu is the cancel path, so it needs no item.
+class EndRunMenuDelegate extends WatchUi.Menu2InputDelegate {
     private var _recorder as ActivityRecorder;
+
+    public static function build() as WatchUi.Menu2 {
+        var menu = new WatchUi.Menu2({:title => "END RUN"});
+        menu.addItem(new WatchUi.MenuItem("Save run", "sync to Garmin Connect",
+            :save, null));
+        menu.addItem(new WatchUi.MenuItem("Discard run", "delete without saving",
+            :discard, null));
+        menu.addItem(new WatchUi.MenuItem("Cancel", "keep running", :cancel, null));
+        return menu;
+    }
+
+    public function initialize(recorder as ActivityRecorder) {
+        Menu2InputDelegate.initialize();
+        _recorder = recorder;
+    }
+
+    public function onSelect(item as WatchUi.MenuItem) as Void {
+        var id = item.getId();
+
+        if (id == :save) {
+            _recorder.stopAndSave();
+            System.exit();
+
+        } else if (id == :discard) {
+            DiscardConfirmationDelegate.prompt(_recorder);
+
+        } else if (id == :cancel) {
+            WatchUi.popView(WatchUi.SLIDE_DOWN);
+        }
+    }
+}
+
+// Discarding cannot be undone, so it always goes through a confirmation that
+// starts on "No".
+class DiscardConfirmationDelegate extends WatchUi.ConfirmationDelegate {
+    private var _recorder as ActivityRecorder;
+
+    public static function prompt(recorder as ActivityRecorder) as Void {
+        WatchUi.pushView(new WatchUi.Confirmation("Discard run?"),
+            new DiscardConfirmationDelegate(recorder), WatchUi.SLIDE_IMMEDIATE);
+    }
 
     public function initialize(recorder as ActivityRecorder) {
         ConfirmationDelegate.initialize();
@@ -87,7 +130,7 @@ class StopConfirmationDelegate extends WatchUi.ConfirmationDelegate {
 
     public function onResponse(response as WatchUi.Confirm) as Boolean {
         if (response == WatchUi.CONFIRM_YES) {
-            _recorder.stopAndSave();
+            _recorder.stopAndDiscard();
             System.exit();
         }
         return true;
