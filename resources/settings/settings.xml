@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Phone-side mirror of the on-watch MENU. Editing either side updates the same
+  properties; SprintSplitApp.onSettingsChanged reloads when the phone writes.
+-->
+<settings>
+    <setting propertyKey="@Properties.activePreset" title="@Strings.SettingActivePresetTitle"
+        prompt="@Strings.SettingActivePresetPrompt">
+        <settingConfig type="list">
+            <listEntry value="1">@Strings.Preset1</listEntry>
+            <listEntry value="2">@Strings.Preset2</listEntry>
+            <listEntry value="3">@Strings.Preset3</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.splitSecondsCsv" title="@Strings.SettingSplitSeconds1Title"
+        prompt="@Strings.SettingSplitSecondsPrompt">
+        <settingConfig type="alphaNumeric" maxLength="60"/>
+    </setting>
+    <setting propertyKey="@Properties.splitSecondsCsv2" title="@Strings.SettingSplitSeconds2Title"
+        prompt="@Strings.SettingSplitSecondsPrompt">
+        <settingConfig type="alphaNumeric" maxLength="60"/>
+    </setting>
+    <setting propertyKey="@Properties.splitSecondsCsv3" title="@Strings.SettingSplitSeconds3Title"
+        prompt="@Strings.SettingSplitSecondsPrompt">
+        <settingConfig type="alphaNumeric" maxLength="60"/>
+    </setting>
+    <setting propertyKey="@Properties.alertMode" title="@Strings.SettingAlertModeTitle"
+        prompt="@Strings.SettingAlertModePrompt">
+        <settingConfig type="list">
+            <listEntry value="0">@Strings.AlertSound</listEntry>
+            <listEntry value="1">@Strings.AlertVibrate</listEntry>
+            <listEntry value="2">@Strings.AlertBoth</listEntry>
+        </settingConfig>
+    </setting>
+    <setting propertyKey="@Properties.delayEnabled" title="@Strings.SettingDelayEnabledTitle">
+        <settingConfig type="boolean"/>
+    </setting>
+    <setting propertyKey="@Properties.delaySeconds" title="@Strings.SettingDelaySecondsTitle">
+        <settingConfig type="numeric" min="1" max="60"/>
+    </setting>
+</settings>

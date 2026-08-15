@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<strings>
+    <string id="AppName">SprintSplit</string>
+    <string id="SettingActivePresetTitle">使用するプリセット</string>
+    <string id="SettingActivePresetPrompt">スプリット秒数の設定を3つまで保存し、切り替えて使えます（時計のMENUからも選べます）</string>
+    <string id="Preset1">プリセット1</string>
+    <string id="Preset2">プリセット2</string>
+    <string id="Preset3">プリセット3</string>
+    <string id="SettingSplitSeconds1Title">スプリット秒数（プリセット1）</string>
+    <string id="SettingSplitSeconds2Title">スプリット秒数（プリセット2）</string>
+    <string id="SettingSplitSeconds3Title">スプリット秒数（プリセット3）</string>
+    <string id="SettingSplitSecondsPrompt">カンマ区切りで入力（例: 13,26,55）。時計のMENUからも編集できます</string>
+    <string id="SettingAlertModeTitle">知らせ方（音・バイブ）</string>
+    <string id="SettingAlertModePrompt">スタート合図とスプリット到達の知らせ方を選びます（既定は音のみ）</string>
+    <string id="AlertSound">音のみ</string>
+    <string id="AlertVibrate">バイブのみ</string>
+    <string id="AlertBoth">音＋バイブ</string>
+    <string id="SettingDelayEnabledTitle">ディレイスタート</string>
+    <string id="SettingDelaySecondsTitle">ディレイ秒数（開始までの待機時間）</string>
+</strings>

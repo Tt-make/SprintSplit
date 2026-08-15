@@ -1,0 +1,16 @@
+# ビルド成果物
+bin/
+*.prg
+*.iq
+
+# 署名鍵はリポジトリ外（既定 ~/.garmin-keys）に置く。
+# 万一ここに置かれても取り込まれないよう、念のため除外しておく。
+developer_key.pem
+developer_key.der
+*.pem
+*.der
+*.key
+*.p12
+
+# OS/エディタ由来のゴミ
+.DS_Store
